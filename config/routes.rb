@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :items do
-    member do
-      patch :complete
+    resources :points do
+      member do
+        patch :complete
+      end
     end
   end
+
   root 'items#index'
 end

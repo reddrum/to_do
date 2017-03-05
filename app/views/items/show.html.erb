@@ -1,8 +1,23 @@
-<div class="col-md-6 col-md-offset-3">
-  <h2><%= @item.title %></h2>
-  <p><%= @item.description %></p>
+<p id="notice"><%= notice %></p>
 
-  <%= link_to "Edit", edit_item_path(@item) %>
-  <%= link_to "Delete", item_path(@item), method: :delete, data: { confirm: "Are you sure?" } %>
-  <%= link_to "Back", root_path %>
-</div>
+<% if user_signed_in? %>
+
+  <h2 class="todo_list_title"><%= @item.title %></h2>
+  <p class="todo_list_sub_title"><%= @item.description %></p>
+
+  <div id="points_wrapper">
+    <%= render @item.points %>
+    <div id="form">
+      <%= render "points/form" %>
+    </div>
+  </div>
+
+  <div class="links">
+    <%= link_to "Edit", edit_item_path(@item) %>
+    <%= link_to "Delete", item_path(@item), method: :delete, data: { confirm: "Are you sure?" } %>
+    <%= link_to "Back", root_path %>
+  </div>
+
+<% else %>
+    <%= render 'static_landing_page' %>
+<% end %>
